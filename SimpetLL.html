@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Pet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .pet-container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      padding: 20px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .pet-selection {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .pet-emoji {
+      font-size: 50px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .pet-emoji:hover {
+      transform: scale(1.2);
+    }
+
+    .pet {
+      font-size: 100px;
+      margin-top: 20px;
+    }
+
+    .pet h2 {
+      color: #333;
+    }
+
+    .pet-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .pet-button:hover {
+      background-color: #45a049;
+    }
+
+    .status {
+      margin-top: 20px;
+    }
+
+    .status span {
+      font-weight: bold;
+    }
+
+    .happiness {
+      margin-top: 20px;
+    }
+
+    .happiness span {
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choose Your Virtual Pet</h1>
+  <div class="pet-selection">
+    <span class="pet-emoji" onclick="selectPet('cat')">🐱</span>
+    <span class="pet-emoji" onclick="selectPet('dog')">🐶</span>
+    <span class="pet-emoji" onclick="selectPet('rabbit')">🐰</span>
+    <span class="pet-emoji" onclick="selectPet('hamster')">🐹</span>
+    <span class="pet-emoji" onclick="selectPet('bird')">🐦</span>
+    <span class="pet-emoji" onclick="selectPet('fish')">🐟</span>
+    <span class="pet-emoji" onclick="selectPet('turtle')">🐢</span>
+    <span class="pet-emoji" onclick="selectPet('ferret')">🦦</span>
+    <span class="pet-emoji" onclick="selectPet('snake')">🐍</span>
+  </div>
+
+  <div id="pet-container" class="pet-container">
+    <div class="pet">
+      <span id="pet-emoji"></span>
+    </div>
+    <h2 id="pet-name">Select a Pet to Begin</h2>
+    <button class="pet-button" onclick="feedPet()">Feed</button>
+    <button class="pet-button" onclick="playWithPet()">Play</button>
+    <div class="status">
+      <p><span>Happiness:</span> <span id="happiness-level">100</span>%</p>
+    </div>
+  </div>
+
+  <footer>
+    This virtual pet sim is made by Afnan
+  </footer>
+
+  <script>
+    let petType = '';
+    let happiness = 100;
+    let happinessInterval;
+
+    const pets = {
+      cat: '🐱',
+      dog: '🐶',
+      rabbit: '🐰',
+      hamster: '🐹',
+      bird: '🐦',
+      fish: '🐟',
+      turtle: '🐢',
+      ferret: '🦦',
+      snake: '🐍',
+    };
+
+    function selectPet(pet) {
+      petType = pet;
+      document.getElementById("pet-emoji").innerText = pets[pet];
+      document.getElementById("pet-name").innerText = pet.charAt(0).toUpperCase() + pet.slice(1);
+      document.getElementById("pet-container").style.display = 'block';
+
+      // Reset happiness
+      happiness = 100;
+      document.getElementById("happiness-level").innerText = happiness;
+
+      // Start decreasing happiness over time
+      if (happinessInterval) clearInterval(happinessInterval);
+      happinessInterval = setInterval(() => {
+        if (happiness > 0) {
+          happiness -= 1;
+          document.getElementById("happiness-level").innerText = happiness;
+        }
+      }, 5000);
+    }
+
+    function feedPet() {
+      if (happiness < 100) {
+        happiness += 10;
+        document.getElementById("happiness-level").innerText = happiness;
+      }
+    }
+
+    function playWithPet() {
+      if (happiness < 100) {
+        happiness += 5;
+        document.getElementById("happiness-level").innerText = happiness;
+      }
+    }
+  </script>
+
+</body>
+</html>
