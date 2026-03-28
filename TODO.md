@@ -1,0 +1,1 @@
+# TODO Steps for Pushing to Main Branch&#10;&#10;1. [ ] Stage changes: git add .&#10;2. [ ] Commit: git commit -m "Add index.html and remove SimpetLL.html"&#10;3. [ ] Push: git push origin main&#10;4. [ ] Verify status
